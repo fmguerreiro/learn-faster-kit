@@ -88,7 +88,7 @@ def test_omp_mode_templates_only_reference_agents_they_ship() -> None:
         assert "ask" not in {tool.strip() for tool in tools.group(1).split(",")}
 
 
-def test_omp_templates_use_omp_tools_and_valid_ask_payloads() -> None:
+def test_omp_templates_carry_no_claude_syntax_and_valid_ask_payloads() -> None:
     templates = get_agent_templates_dir("omp")
     markdown = list(templates.rglob("*.md"))
     combined = "\n".join(path.read_text() for path in markdown)
