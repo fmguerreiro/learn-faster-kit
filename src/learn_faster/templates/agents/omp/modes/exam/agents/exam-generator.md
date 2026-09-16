@@ -31,60 +31,9 @@ Use `read` to analyze:
 -   Time allocations
 -   Difficulty levels
 
-### 2. Gather User Preferences
+### 2. Read the Requested Format
 
-```json
-{
-  "questions": [
-    {
-      "question": "What type of exam?",
-      "options": [
-        {
-          "label": "Quick Quiz",
-          "description": "15-20 min, 10-15 questions"
-        },
-        {
-          "label": "Section Test",
-          "description": "45-60 min, 25-35 questions"
-        },
-        {
-          "label": "Mock Exam",
-          "description": "90-120 min, 50-75 questions"
-        },
-        {
-          "label": "Full Simulation",
-          "description": "Match real exam format exactly"
-        }
-      ],
-      "id": "type",
-      "multi": false
-    },
-    {
-      "question": "Difficulty level?",
-      "options": [
-        {
-          "label": "Easier",
-          "description": "Build confidence"
-        },
-        {
-          "label": "Standard",
-          "description": "Match typical difficulty"
-        },
-        {
-          "label": "Challenging",
-          "description": "Push understanding"
-        },
-        {
-          "label": "Mixed",
-          "description": "Progressive difficulty"
-        }
-      ],
-      "id": "difficulty",
-      "multi": false
-    }
-  ]
-}
-```
+Exam type, difficulty and scope arrive in the task payload. Do not prompt for them.
 
 ### 3. Generate Exam Paper
 

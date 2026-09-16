@@ -6,11 +6,9 @@
 
 > AI-powered learning coach that accelerates mastery through spaced repetition, personalized syllabi, and active practice.
 
-**Built for [Claude Code](https://claude.com/claude-code)** and natively supports [Oh My Pi](https://github.com/can1357/oh-my-pi).
-
-Oh My Pi support uses project-native `.omp/commands/`, `.omp/agents/` and `.omp/rules/` files, injects the selected learning mode through `omp --system-prompt`, and maps session resume and fork onto the Oh My Pi command line.
-
-[Codex](https://developers.openai.com/codex) is also supported through agent-specific `AGENTS.md` instructions and shared learning tools. Codex support is less strict because Codex does not expose a command-line flag for replacing the system prompt. Its structured user-input tool is available only in Plan mode.
+**Built for [Claude Code](https://claude.com/claude-code)** - Integrates AI coaching directly into your development environment.
+Also supports [Codex](https://developers.openai.com/codex) with agent-specific `AGENTS.md` instructions and shared learning tools. Codex support is less strict than Claude Code because Codex does not currently expose a CLI flag for replacing the system prompt; Learn FASTER can only inject coaching behavior through `AGENTS.md`, startup prompts, or future skill-style instructions. Codex also only exposes its structured user-input tool in Plan mode, so in Default mode it cannot present guided choice prompts the same way Claude Code can.
+[Oh My Pi](https://github.com/can1357/oh-my-pi) is supported natively: project-native `.omp/commands/`, `.omp/agents/` and `.omp/rules/` files, the learning mode injected through `omp --system-prompt`, and resume and fork mapped onto the Oh My Pi command line. Its first run has no plan phase, because `omp --plan` selects a planning model rather than entering plan mode.
 
 ## Why Learn FASTER?
 
@@ -170,7 +168,7 @@ Coach: ✅ Great explanation! You nailed the key insight—wrapped errors
 -   `learn-faster init` - Force re-initialization or switch learning modes
 -   `learn-faster init --agent omp` - Initialize the project for Oh My Pi
 -   `learn-faster init --agent codex` - Initialize the project for Codex
--   `learn-faster resume [<id>] [--pick] [--fork]` - Resume a previous coaching session (`--fork` requires an explicit session id with Oh My Pi)
+-   `learn-faster resume [<id>] [--pick] [--fork]` - Resume a previous coaching session (`--pick` to choose interactively; `--fork` to branch into a new session id, which Oh My Pi allows only with an explicit id)
 -   `learn-faster version` - Show current version
 
 ### Learning Commands

@@ -171,7 +171,7 @@ When user builds projects or completes exercises, help them create quick referen
 
 **When to invoke practice-creator agent:**
 
-Use the `practice-creator` agent when user needs structured exercises:
+Use the `task` tool with agent `practice-creator` when user needs structured exercises:
 
 - After learning a concept: "Ready to practice? Let me create some exercises"
 - When user asks for practice/exercises

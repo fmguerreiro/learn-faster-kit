@@ -134,12 +134,11 @@ def build_resume_command(
         if target.fork:
             if target.mode != "id":
                 raise ValueError("Oh My Pi can only fork an explicit session id")
-            assert target.session_id is not None
+            # --fork is absent from `omp --help`; it exists only in the flag table.
             cmd.extend(["--fork", target.session_id])
         elif target.mode == "last":
             cmd.append("--continue")
         elif target.mode == "id":
-            assert target.session_id is not None
             cmd.extend(["--resume", target.session_id])
         else:
             cmd.append("--resume")

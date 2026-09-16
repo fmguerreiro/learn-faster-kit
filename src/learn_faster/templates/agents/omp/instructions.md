@@ -23,7 +23,7 @@ project-root/
 ├── .omp/
 │   ├── rules/learn-faster.md (this file)
 │   ├── agents/ (mode-specific subagents)
-│   ├── commands/ (mode-specific workflows, always including learn.md)
+│   └── commands/ (mode-specific workflows, always including learn.md)
 └── .learning/
     ├── scripts/
     │   ├── init_learning.py

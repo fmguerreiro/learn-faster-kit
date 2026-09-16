@@ -15,6 +15,7 @@ class AgentProfile:
     launch_style: str
     install_url: str
     supports_settings: bool = False
+    supports_slash_commands: bool = False
     plan_mode_cmd: str = ""
 
 
@@ -28,6 +29,7 @@ AGENT_PROFILES = {
         launch_style="system-prompt",
         install_url="https://claude.ai/download",
         supports_settings=True,
+        supports_slash_commands=True,
         plan_mode_cmd="--permission-mode plan",
     ),
     "codex": AgentProfile(
@@ -48,6 +50,7 @@ AGENT_PROFILES = {
         instruction_file=".omp/rules/learn-faster.md",
         launch_style="system-prompt",
         install_url="https://github.com/can1357/oh-my-pi",
+        supports_slash_commands=True,
     ),
 }
 
