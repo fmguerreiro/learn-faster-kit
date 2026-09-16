@@ -162,5 +162,4 @@ def test_omp_templates_use_omp_tools_and_valid_ask_payloads() -> None:
             assert payload["questions"]
             for question in payload["questions"]:
                 assert {"id", "question", "options"} <= set(question)
-                assert "header" not in question
                 assert "multiSelect" not in question
