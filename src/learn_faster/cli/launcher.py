@@ -129,6 +129,22 @@ def build_resume_command(
             cmd.append(target.session_id)
         return cmd
 
+    if agent.name == "omp":
+        cmd = [agent.executable, "--system-prompt", system_prompt]
+        if target.fork:
+            if target.mode != "id":
+                raise ValueError("Oh My Pi can only fork an explicit session id")
+            assert target.session_id is not None
+            cmd.extend(["--fork", target.session_id])
+        elif target.mode == "last":
+            cmd.append("--continue")
+        elif target.mode == "id":
+            assert target.session_id is not None
+            cmd.extend(["--resume", target.session_id])
+        else:
+            cmd.append("--resume")
+        return cmd
+
     raise ValueError(f"Resume is not supported for agent '{agent.name}'")
 
 
@@ -142,16 +158,22 @@ def resume_session(target: ResumeTarget) -> None:
         sys.exit(1)
 
     learning_mode = config.get("learning_mode", "balanced")
-    # Claude rebuilds the system prompt from CLI flags on every turn (it is not
-    # persisted in the session JSONL). We re-pass it so the resumed session keeps
-    # FASTER coaching behavior. Codex persists the original first-user-turn prompt
-    # inside the transcript, so it does not need (and must not get) re-injection.
-    system_prompt = read_system_prompt(agent, learning_mode) if agent.name == "claude-code" else ""
+    # System-prompt agents rebuild their prompt from CLI flags when resuming.
+    # Codex persists the original first-user-turn prompt inside the transcript.
+    system_prompt = (
+        read_system_prompt(agent, learning_mode)
+        if agent.launch_style == "system-prompt"
+        else ""
+    )
 
     print_info(f"Resuming {agent.display_name} session...")
     print_dim(f"(Mode: {target.mode}{', fork' if target.fork else ''})\n")
 
-    cmd = build_resume_command(agent, system_prompt, target)
+    try:
+        cmd = build_resume_command(agent, system_prompt, target)
+    except ValueError as exc:
+        print_error(str(exc))
+        sys.exit(1)
     _run_agent(cmd, agent)
 
 

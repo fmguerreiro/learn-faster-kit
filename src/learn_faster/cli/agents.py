@@ -40,6 +40,16 @@ AGENT_PROFILES = {
         install_url="https://developers.openai.com/codex",
         plan_mode_cmd="--enable collaboration_modes",
     ),
+    "omp": AgentProfile(
+        name="omp",
+        display_name="Oh My Pi",
+        config_dir=".omp",
+        executable="omp",
+        instruction_file=".omp/rules/learn-faster.md",
+        launch_style="system-prompt",
+        install_url="https://github.com/can1357/oh-my-pi",
+        plan_mode_cmd="--plan",
+    ),
 }
 
 DEFAULT_AGENT = "claude-code"

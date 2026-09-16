@@ -227,6 +227,7 @@ def init_project(agent_name: str | None = None) -> None:
     instructions_src = agent_templates_dir / "instructions.md"
     instructions_dest = cwd / agent.instruction_file
     if instructions_src.exists() and not instructions_dest.exists():
+        instructions_dest.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(instructions_src, instructions_dest)
         print_success(
             f"Copied instructions to {agent.instruction_file} in project root"
@@ -237,7 +238,7 @@ def init_project(agent_name: str | None = None) -> None:
     print(f"\n{Colors.GREEN}{Colors.BOLD}Initialization complete!{Colors.RESET}\n")
 
     print_header(f"Available workflows in {agent.display_name}:")
-    if agent.name == "claude-code":
+    if agent.name in {"claude-code", "omp"}:
         print(
             f"  {Colors.CYAN}/learn [topic]{Colors.RESET}    - Initialize or continue learning"
         )
