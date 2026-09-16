@@ -1,5 +1,5 @@
 ---
-description: Initialize a new learning topic $ARGUMENTS for deep conceptual understanding using the FASTER framework
+description: Initialize a new learning topic for deep conceptual understanding using the FASTER framework
 ---
 
 ## Context

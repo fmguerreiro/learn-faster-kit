@@ -158,8 +158,7 @@ def resume_session(target: ResumeTarget) -> None:
         sys.exit(1)
 
     learning_mode = config.get("learning_mode", "balanced")
-    # System-prompt agents rebuild their prompt from CLI flags when resuming.
-    # Codex persists the original first-user-turn prompt inside the transcript.
+    # Codex keeps the prompt in its transcript; the others must be re-passed on resume.
     system_prompt = (
         read_system_prompt(agent, learning_mode)
         if agent.launch_style == "system-prompt"

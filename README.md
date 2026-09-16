@@ -8,7 +8,7 @@
 
 **Built for [Claude Code](https://claude.com/claude-code)** and natively supports [Oh My Pi](https://github.com/can1357/oh-my-pi).
 
-Oh My Pi support uses project-native `.omp/commands/`, `.omp/agents/`, and `.omp/rules/` files, injects the selected learning mode through `omp --system-prompt`, supports `--plan`, and maps session resume and fork operations to the Oh My Pi command-line interface.
+Oh My Pi support uses project-native `.omp/commands/`, `.omp/agents/` and `.omp/rules/` files, injects the selected learning mode through `omp --system-prompt`, and maps session resume and fork onto the Oh My Pi command line.
 
 [Codex](https://developers.openai.com/codex) is also supported through agent-specific `AGENTS.md` instructions and shared learning tools. Codex support is less strict because Codex does not expose a command-line flag for replacing the system prompt. Its structured user-input tool is available only in Plan mode.
 
@@ -97,13 +97,12 @@ For Oh My Pi, run `learn-faster init --agent omp`. It creates the same `.learnin
 ```
 your-project/
 └── .omp/
-    ├── agents/practice-creator.md
-    ├── commands/
-    │   ├── learn.md
-    │   ├── review.md
-    │   └── progress.md
+    ├── agents/          (mode-specific subagents)
+    ├── commands/        (mode-specific workflows, always including learn.md)
     └── rules/learn-faster.md
 ```
+
+The rule file carries `alwaysApply: true`, so the coaching protocols stay in context for the whole session.
 
 ## Quick Start
 

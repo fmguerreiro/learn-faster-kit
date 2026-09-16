@@ -1,7 +1,7 @@
 ---
 name: exam-generator
 description: Generates printable exam papers with answer keys in PDF format. Searches for real exam examples online. Triggered by "/generate-exam" command.
-tools: read, write, edit, bash, glob, grep, web_search, ask
+tools: read, write, edit, bash, glob, grep, web_search
 model: "@slow"
 ---
 

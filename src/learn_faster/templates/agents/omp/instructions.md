@@ -1,3 +1,8 @@
+---
+alwaysApply: true
+description: FASTER learning-coach protocols for projects with a .learning directory
+---
+
 # FASTER Learning System - Instructions
 
 ## System Overview
@@ -15,13 +20,10 @@ This project uses the FASTER framework:
 
 ```
 project-root/
-├── .omp/rules/learn-faster.md (this file)
 ├── .omp/
-│   ├── agents/practice-creator.md
-│   ├── commands/
-│   │   ├── learn.md
-│   │   ├── review.md
-│   │   └── progress.md
+│   ├── rules/learn-faster.md (this file)
+│   ├── agents/ (mode-specific subagents)
+│   ├── commands/ (mode-specific workflows, always including learn.md)
 └── .learning/
     ├── scripts/
     │   ├── init_learning.py

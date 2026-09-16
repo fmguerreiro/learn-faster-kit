@@ -48,7 +48,6 @@ AGENT_PROFILES = {
         instruction_file=".omp/rules/learn-faster.md",
         launch_style="system-prompt",
         install_url="https://github.com/can1357/oh-my-pi",
-        plan_mode_cmd="--plan",
     ),
 }
 

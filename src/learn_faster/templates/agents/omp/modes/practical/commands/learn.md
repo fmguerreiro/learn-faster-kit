@@ -1,5 +1,5 @@
 ---
-description: Initialize a new learning topic $ARGUMENTS through building real projects using the FASTER framework
+description: Initialize a new learning topic through building real projects using the FASTER framework
 ---
 
 ## Context

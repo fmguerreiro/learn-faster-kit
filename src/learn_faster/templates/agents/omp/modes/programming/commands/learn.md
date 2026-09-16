@@ -1,5 +1,5 @@
 ---
-description: Initialize or continue learning a programming topic $ARGUMENTS using project-based approach
+description: Initialize or continue learning a programming topic using project-based approach
 ---
 
 ## Context

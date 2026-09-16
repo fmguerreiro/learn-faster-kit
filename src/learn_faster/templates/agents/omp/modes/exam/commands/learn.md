@@ -1,5 +1,5 @@
 ---
-description: Initialize a new learning topic $ARGUMENTS for exam preparation using the FASTER framework
+description: Initialize a new learning topic for exam preparation using the FASTER framework
 ---
 
 ## Context
