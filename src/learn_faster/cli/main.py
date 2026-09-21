@@ -22,6 +22,7 @@ def print_help() -> None:
     print("  learn-faster init                  Force re-initialization")
     print("  learn-faster init --agent claude-code")
     print("  learn-faster init --agent codex")
+    print("  learn-faster init --agent omp")
     print("  learn-faster resume                Continue the most recent session in this project")
     print("  learn-faster resume <id>           Resume a specific session by id")
     print("  learn-faster resume --pick         Open the agent's interactive session picker")
@@ -41,7 +42,7 @@ def parse_agent_arg(args: list[str]) -> str | None:
         return args[1]
 
     print_error("Invalid arguments")
-    print_dim("Usage: learn-faster init [--agent claude-code|codex]")
+    print_dim("Usage: learn-faster init [--agent claude-code|codex|omp]")
     sys.exit(1)
 
 

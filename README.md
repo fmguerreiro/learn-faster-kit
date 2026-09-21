@@ -8,6 +8,7 @@
 
 **Built for [Claude Code](https://claude.com/claude-code)** - Integrates AI coaching directly into your development environment.
 Also supports [Codex](https://developers.openai.com/codex) with agent-specific `AGENTS.md` instructions and shared learning tools. Codex support is less strict than Claude Code because Codex does not currently expose a CLI flag for replacing the system prompt; Learn FASTER can only inject coaching behavior through `AGENTS.md`, startup prompts, or future skill-style instructions. Codex also only exposes its structured user-input tool in Plan mode, so in Default mode it cannot present guided choice prompts the same way Claude Code can.
+[Oh My Pi](https://github.com/can1357/oh-my-pi) is supported natively: project-native `.omp/commands/`, `.omp/agents/` and `.omp/rules/` files, the learning mode injected through `omp --system-prompt`, and resume and fork mapped onto the Oh My Pi command line. Its first run has no plan phase, because `omp --plan` selects a planning model rather than entering plan mode.
 
 ## Why Learn FASTER?
 
@@ -51,7 +52,7 @@ Then in any project directory, simply run:
 learn-faster
 ```
 
-This will auto-initialize on first run and launch Claude Code with FASTER coaching mode.
+This auto-initializes the project, asks which supported agent to use, and launches it with FASTER coaching enabled.
 
 ### Option 2: One-Time Use
 
@@ -88,6 +89,18 @@ your-project/
 ```
 
 For Codex, run `learn-faster init --agent codex`. It creates the same `.learning/` shared tools and writes Codex instructions to `AGENTS.md`. Because Codex does not provide a system-prompt replacement flag, adherence depends on Codex reading those project instructions and the launch prompt. Codex guided-choice interactions are also limited: the user-input tool is available only in Plan mode, so Default mode falls back to plain conversational questions.
+
+For Oh My Pi, run `learn-faster init --agent omp`. It creates the same `.learning/` shared tools plus:
+
+```
+your-project/
+└── .omp/
+    ├── agents/          (mode-specific subagents)
+    ├── commands/        (mode-specific workflows, always including learn.md)
+    └── rules/learn-faster.md
+```
+
+The rule file carries `alwaysApply: true`, so the coaching protocols stay in context for the whole session.
 
 ## Quick Start
 
@@ -151,15 +164,16 @@ Coach: ✅ Great explanation! You nailed the key insight—wrapped errors
 
 ### CLI Commands
 
--   `learn-faster` - Launch Claude Code with FASTER coaching (auto-initializes on first run)
+-   `learn-faster` - Launch the configured agent with FASTER coaching (auto-initializes on first run)
 -   `learn-faster init` - Force re-initialization or switch learning modes
--   `learn-faster init --agent codex` - Initialize the project for Codex instead of Claude Code
--   `learn-faster resume [<id>] [--pick] [--fork]` - Resume a previous coaching session (`--pick` to choose interactively; `--fork` to branch into a new session id)
+-   `learn-faster init --agent omp` - Initialize the project for Oh My Pi
+-   `learn-faster init --agent codex` - Initialize the project for Codex
+-   `learn-faster resume [<id>] [--pick] [--fork]` - Resume a previous coaching session (`--pick` to choose interactively; `--fork` to branch into a new session id, which Oh My Pi allows only with an explicit id)
 -   `learn-faster version` - Show current version
 
-### Claude Code Slash Commands
+### Learning Commands
 
-Once Claude Code is running, use these commands:
+Once Claude Code or Oh My Pi is running, use these commands:
 
 -   `/learn [topic]` - Start or continue learning a topic with personalized syllabus
 -   `/review` - Spaced repetition review session for topics you've learned
@@ -205,7 +219,7 @@ Learn FASTER is ideal for:
 ## Requirements
 
 -   Python 3.12+
--   [Claude Code](https://claude.com/claude-code)
+-   At least one supported agent: [Claude Code](https://claude.com/claude-code), [Oh My Pi](https://github.com/can1357/oh-my-pi), or [Codex](https://developers.openai.com/codex)
 -   [uv](https://docs.astral.sh/uv/) package manager
 
 ## Contributing

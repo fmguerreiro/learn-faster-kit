@@ -13,6 +13,7 @@ from learn_faster.cli.launcher import (
 
 CLAUDE = get_agent_profile("claude-code")
 CODEX = get_agent_profile("codex")
+OMP = get_agent_profile("omp")
 PROMPT = "FASTER coaching system prompt"
 
 
@@ -76,3 +77,26 @@ def test_codex_resume_does_not_inject_prompt() -> None:
         cmd = build_resume_command(CODEX, PROMPT, target)
         assert PROMPT not in cmd
         assert "--system-prompt" not in cmd
+
+
+@pytest.mark.parametrize(
+    "target, expected_tail",
+    [
+        (ResumeTarget(mode="last"), ["--continue"]),
+        (ResumeTarget(mode="id", session_id="abc-123"), ["--resume", "abc-123"]),
+        (ResumeTarget(mode="pick"), ["--resume"]),
+        (
+            ResumeTarget(mode="id", session_id="abc-123", fork=True),
+            ["--fork", "abc-123"],
+        ),
+    ],
+)
+def test_omp_resume_command_shape(target: ResumeTarget, expected_tail: list[str]) -> None:
+    cmd = build_resume_command(OMP, PROMPT, target)
+    assert cmd[:3] == ["omp", "--system-prompt", PROMPT]
+    assert cmd[3:] == expected_tail
+
+
+def test_omp_fork_requires_explicit_session_id() -> None:
+    with pytest.raises(ValueError, match="explicit session id"):
+        build_resume_command(OMP, PROMPT, ResumeTarget(mode="last", fork=True))
